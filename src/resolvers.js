@@ -38,7 +38,7 @@ const resolvers = {
                         routeId = newRouteId;
                     }
                 }
-                const vtime = vehicle.timestamp;
+                const vtime = convertTimestampToSec(vehicle.timestamp);
 
                 if (!vehiclesByRouteByTime[routeId]) {
                     vehiclesByRouteByTime[routeId] = {};
@@ -84,9 +84,6 @@ const resolvers = {
                 });
             }
 
-            const getMatchedRoutes = (routes, vehiclesByRouteByTime) => {
-                // Return the route objects 
-            }
             // get all the routes
             const routeIDs = routes ?
                 _.intersection(routes, Object.keys(vehiclesByRouteByTime)) :
