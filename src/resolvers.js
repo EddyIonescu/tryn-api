@@ -3,6 +3,7 @@ const removeMuniMetroDuplicates = require('./helpers/removeMuniMetroDuplicates')
 const BigInt = require('./bigint');
 
 const _ = require('lodash');
+import convertTimestampToSec from './convertTimestampToSec.js';
 
 const debug = !!process.env.DEBUG;
 
