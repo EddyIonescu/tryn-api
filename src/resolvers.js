@@ -39,7 +39,8 @@ const resolvers = {
                         routeId = newRouteId;
                     }
                 }
-                const vtime = convertTimestampToSec(vehicle.timestamp);
+                vehicle.timestamp = convertTimestampToSec(vehicle.timestamp);
+                const vtime = vehicle.timestamp;
 
                 if (!vehiclesByRouteByTime[routeId]) {
                     vehiclesByRouteByTime[routeId] = {};

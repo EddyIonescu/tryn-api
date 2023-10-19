@@ -1,4 +1,3 @@
-
 module.exports = timestamp => {
   if (timestamp > 2147483647) {
     // This is the epoch for January 1, 2038, after which 32-bit integers will no longer work for timestmaps.
