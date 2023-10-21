@@ -42,6 +42,19 @@ const resolvers = {
                 vehicle.timestamp = convertTimestampToSec(vehicle.timestamp);
                 const vtime = vehicle.timestamp;
 
+                if (vehicle.secsSinceReport > 2147483647) {
+                    // secsSinceReport (S) is the feed.timestamp (date.now - can be in ms rather than seconds) (V)
+                    // minus the feed vehicle timestamp (F) (in seconds).
+                    // S = V - F
+                    // We want to obtain F
+                    // F = V - S
+                    // vtime is the feed.timestamp.
+                    // vtime was initially in ms, but vtime is always in seconds.
+                    const feedVehicleTimestamp =  (vtime * 1000 - vehicle.secsSinceReport) / 1000;
+                    // recalculate S.
+                   vehicle.secsSinceReport = Math.max(0, vtime  - feedVehicleTimestamp)
+                }
+
                 if (!vehiclesByRouteByTime[routeId]) {
                     vehiclesByRouteByTime[routeId] = {};
                 }
