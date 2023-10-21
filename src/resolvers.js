@@ -52,7 +52,7 @@ const resolvers = {
                     // vtime was initially in ms, but vtime is always in seconds.
                     const feedVehicleTimestamp =  (vtime * 1000 - vehicle.secsSinceReport) / 1000;
                     // recalculate S.
-                   vehicle.secsSinceReport = Math.max(0, vtime  - feedVehicleTimestamp)
+                   vehicle.secsSinceReport = Math.round(Math.max(0, vtime  - feedVehicleTimestamp))
                 }
 
                 if (!vehiclesByRouteByTime[routeId]) {
