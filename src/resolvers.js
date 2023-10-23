@@ -41,17 +41,17 @@ const resolvers = {
                 }
                 const vtime = vehicle.timestamp;
 
-                if (vehicle.secsSinceReport > 2147483647) {
-                    // secsSinceReport (S) is the feed.timestamp (date.now - can be in ms rather than seconds) (V)
-                    // minus the feed vehicle timestamp (F) (in seconds).
-                    // S = V - F
-                    // We want to obtain F
-                    // F = V - S
-                    // vtime is the feed.timestamp.
-                    // vtime was initially in ms, but vtime is always in seconds.
-                    const feedVehicleTimestamp =  vtime - vehicle.secsSinceReport;
+                if (vehicle.secsSinceReport > 1000000) {
+                    // secsSinceReport (S) is the feed.timestamp (date.now - can be in ms rather than seconds) (F)
+                    // minus the vehicle timestamp (V) (in seconds).
+                    // S = F - V
+                    // We want to obtain V
+                    // V = F - S
+                    // vtime is the feed.timestamp - in milliseconds.
+                    // vehicle timestamp is from the GTFS-RT (not saved by Orion) and was initially in seconds.
+                    const vehicleFeedTimestamp =  (vtime - vehicle.secsSinceReport) * 1000;
                     // recalculate S.
-                   vehicle.secsSinceReport = Math.round(Math.max(0, vtime  - feedVehicleTimestamp) / 1000)
+                   vehicle.secsSinceReport = Math.round(Math.max(0, vtime - vehicleFeedTimestamp) / 1000)
                 }
 
                 if (!vehiclesByRouteByTime[routeId]) {
