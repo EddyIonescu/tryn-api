@@ -47,11 +47,10 @@ const resolvers = {
                     // S = F - V
                     // We want to obtain V
                     // V = F - S
-                    // vtime is the feed.timestamp - in milliseconds.
                     // vehicle timestamp is from the GTFS-RT (not saved by Orion) and was initially in seconds.
-                    const vehicleFeedTimestamp =  (vtime - vehicle.secsSinceReport) * 1000;
+                    const vehicleFeedTimestamp =  (vtime - vehicle.secsSinceReport);
                     // recalculate S.
-                   vehicle.secsSinceReport = Math.round(Math.max(0, vtime - vehicleFeedTimestamp) / 1000)
+                   vehicle.secsSinceReport = Math.round(Math.max(0, vtime - vehicleFeedTimestamp*1000) / 1000);
                 }
 
                 if (!vehiclesByRouteByTime[routeId]) {
