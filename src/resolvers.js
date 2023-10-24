@@ -50,7 +50,7 @@ const resolvers = {
                     // vehicle timestamp is from the GTFS-RT (not saved by Orion) and was initially in seconds.
                     const vehicleFeedTimestamp =  (vtime - vehicle.secsSinceReport);
                     // recalculate S.
-                   vehicle.secsSinceReport = Math.round(Math.max(0, vtime - vehicleFeedTimestamp*1000) / 1000);
+                   vehicle.secsSinceReport = Math.round(Math.max(0, vtime/1000 - vehicleFeedTimestamp) / 1000);
                 }
 
                 if (!vehiclesByRouteByTime[routeId]) {
