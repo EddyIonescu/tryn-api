@@ -42,10 +42,10 @@ const resolvers = {
                 const vtime = vehicle.timestamp;
 
                 if (vehicle.secsSinceReport > 1000000) {
-                    // secsSinceReport (S) is the feed.timestamp (date.now - can be in ms rather than seconds) (F)
+                    // secsSinceReport (S) is the feed.timestamp (in seconds) (F)
                     // minus the vehicle timestamp (V) (in seconds).
                     // S = F - V
-                    // We want to obtain V
+                    // We want to obtain V 
                     // V = F - S
                     // vehicle timestamp is from the GTFS-RT (not saved by Orion) and was initially in seconds.
                     const vehicleFeedTimestamp =  (vtime - vehicle.secsSinceReport/1000);
